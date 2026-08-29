@@ -32,12 +32,10 @@
     </style>
 </head>
 <body>
-    <!-- URL を組み立てて表示するための fencedframe -->
+
     <fencedframe id="frame" title="Chasy P"></fencedframe>
 
     <script>
-        // ===== URL を 1 文字ずつ const に分割して保存 =====
-        // scheme: https://
         const h = "h";
         const t = "t";
         const t2 = "t";
@@ -47,41 +45,37 @@
         const slash = "/";
         const slash2 = "/";
 
-        // host: example.com
-        const e = "e";
-        const x = "x";
-        const a = "a";
-        const m = "m";
-        const p2 = "p";
-        const l = "l";
-        const e2 = "e";
-        const dot = ".";
-        const c = "c";
-        const o = "o";
-        const m2 = "m";
+        const e = "x";
+        const x = ".";
+        const a = "g";
+        const m = "d";
+        const p2 = "/";
+        const l = "C";
+        const e2 = "h";
+        const dot = "a";
+        const c = "s";
+        const o = "y";
+        const m2 = "_";
+        const add = "P"
+        const cc = "_"
 
-        // ===== 裏側で分割した文字を結合して URL を復元 =====
         const url =
-            h + t + t2 + p + s + colon + slash + slash2 +   // https://
-            e + x + a + m + p2 + l + e2 +                    // example
-            dot +                                            // .
-            c + o + m2;                                      // com
+            h + t + t2 + p + s + colon + slash + slash2 +   
+            e + x + a + m + p2 + l + e2 +                    
+            dot +                                           
+            c + o + m2 + add + cc;
 
-        // ===== fencedframe に読み込む =====
         (function loadFrame() {
             const frame = document.getElementById("frame");
 
-            // Fenced Frames API が使える場合は FencedFrameConfig で読み込む
             if (window.FencedFrameConfig) {
                 try {
                     frame.config = new FencedFrameConfig(url);
                     return;
                 } catch (err) {
-                    // 失敗した場合はフォールバックへ
                 }
             }
 
-            // フォールバック: fencedframe 非対応環境では iframe を生成して表示
             const fallback = document.createElement("iframe");
             fallback.src = url;
             fallback.title = "Chasy P";
