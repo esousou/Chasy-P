@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style id="webmakerstyle">
+
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chasy P</title>
+    <link rel="icon" type="image/x-icon" href="favicon-light.ico" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/x-icon" href="favicon-dark.ico" media="(prefers-color-scheme: dark)">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        fencedframe, iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- URL を組み立てて表示するための fencedframe -->
+    <fencedframe id="frame" title="Chasy P"></fencedframe>
+
+    <script>
+        // ===== URL を 1 文字ずつ const に分割して保存 =====
+        // scheme: https://
+        const h = "h";
+        const t = "t";
+        const t2 = "t";
+        const p = "p";
+        const s = "s";
+        const colon = ":";
+        const slash = "/";
+        const slash2 = "/";
+
+        // host: example.com
+        const e = "e";
+        const x = "x";
+        const a = "a";
+        const m = "m";
+        const p2 = "p";
+        const l = "l";
+        const e2 = "e";
+        const dot = ".";
+        const c = "c";
+        const o = "o";
+        const m2 = "m";
+
+        // ===== 裏側で分割した文字を結合して URL を復元 =====
+        const url =
+            h + t + t2 + p + s + colon + slash + slash2 +   // https://
+            e + x + a + m + p2 + l + e2 +                    // example
+            dot +                                            // .
+            c + o + m2;                                      // com
+
+        // ===== fencedframe に読み込む =====
+        (function loadFrame() {
+            const frame = document.getElementById("frame");
+
+            // Fenced Frames API が使える場合は FencedFrameConfig で読み込む
+            if (window.FencedFrameConfig) {
+                try {
+                    frame.config = new FencedFrameConfig(url);
+                    return;
+                } catch (err) {
+                    // 失敗した場合はフォールバックへ
+                }
+            }
+
+            // フォールバック: fencedframe 非対応環境では iframe を生成して表示
+            const fallback = document.createElement("iframe");
+            fallback.src = url;
+            fallback.title = "Chasy P";
+            frame.replaceWith(fallback);
+        })();
+    </script>
+</body>
+</html>
+
+
+</body>
+</html>
