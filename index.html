@@ -72,6 +72,11 @@
             fallback.title = "Chasy P";
             frame.replaceWith(fallback);
         })();
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker 登録成功'))
+                .catch(err => console.error('Service Worker 登録失敗', err));
+        } 
     </script>
 </body>
 </html>
