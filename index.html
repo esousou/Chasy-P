@@ -24,7 +24,8 @@
 </head>
 <body>
 
-    <fencedframe id="frame" title="Chasy P"></fencedframe>
+    <!-- 1. fencedframeにallow属性を追加 -->
+    <fencedframe id="frame" title="Chasy P" allow="clipboard-read; clipboard-write"></fencedframe>
 
     <script>
         const h = "h";
@@ -70,6 +71,7 @@
             const fallback = document.createElement("iframe");
             fallback.src = url;
             fallback.title = "Chasy P";
+            fallback.setAttribute("allow", "clipboard-read; clipboard-write");
             frame.replaceWith(fallback);
         })();
         if ('serviceWorker' in navigator) {
