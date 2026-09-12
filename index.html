@@ -24,7 +24,6 @@
 </head>
 <body>
 
-    <!-- 1. fencedframeにallow属性を追加 -->
     <fencedframe id="frame" title="Chasy P" allow="clipboard-read; clipboard-write"></fencedframe>
 
     <script>
@@ -72,8 +71,10 @@
             fallback.src = url;
             fallback.title = "Chasy P";
             fallback.setAttribute("allow", "clipboard-read; clipboard-write");
+            
             frame.replaceWith(fallback);
         })();
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
                 .then(() => console.log('Service Worker 登録成功'))
