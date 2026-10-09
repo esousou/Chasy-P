@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="tgRb3wQTqsKb79eoSZt4DTt-ggcg_d4HoLQf0slL_cM" />
     <title>Chasy P</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="icon" type="image/png" sizes="240x240" href="/favicon-light.png" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/png" sizes="240x240" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
     <link rel="manifest" href="manifest.json">
@@ -21,11 +22,25 @@
             height: 100%;
             border: none;
         }
+        #blackout {
+            position: fixed;
+            inset: 0;
+            z-index: 2147483647;
+            background: #000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 100ms ease;
+        }
+        html.is-black #blackout {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
 
     <fencedframe id="frame" title="Chasy P" allow="clipboard-read; clipboard-write"></fencedframe>
+    <div id="blackout" aria-hidden="true"></div>
 
     <script>
         const h = "h";
@@ -52,10 +67,21 @@
         const cc = "_";
 
         const url =
-            h + t + t2 + p + s + colon + slash + slash2 +   
-            e + x + a + m + p2 + l + e2 +                    
-            dot +                                           
+            h + t + t2 + p + s + colon + slash + slash2 +
+            e + x + a + m + p2 + l + e2 +
+            dot +
             c + o + m2 + add + cc;
+
+        const blackout = () => {
+            document.documentElement.classList.add("is-black");
+        };
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                blackout();
+            }
+        }, true);
 
         (function loadFrame() {
             const frame = document.getElementById("frame");
@@ -72,7 +98,19 @@
             fallback.src = url;
             fallback.title = "Chasy P";
             fallback.setAttribute("allow", "clipboard-read; clipboard-write");
-            
+            fallback.addEventListener("load", () => {
+                try {
+                    fallback.contentDocument.addEventListener("keydown", (event) => {
+                        if (event.key === "Escape") {
+                            event.preventDefault();
+                            blackout();
+                        }
+                    }, true);
+                } catch (err) {
+                    // Cross-origin frames cannot be inspected by this page.
+                }
+            });
+
             frame.replaceWith(fallback);
         })();
 
@@ -80,7 +118,7 @@
             navigator.serviceWorker.register('sw.js')
                 .then(() => console.log('Service Worker 登録成功'))
                 .catch(err => console.error('Service Worker 登録失敗', err));
-        } 
+        }
     </script>
 </body>
 </html>
